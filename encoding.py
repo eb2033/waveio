@@ -1,4 +1,5 @@
 from enum import IntEnum
+import numpy as np
 
 class PCMEncoding(IntEnum):
     UNSIGNED_8 = 1
@@ -17,3 +18,13 @@ class PCMEncoding(IntEnum):
     @property
     def num_bits(self):
         return 8 * self
+
+def decode(self, frames):
+        match self:
+            case PCMEncoding.UNSIGNED_8:
+                return np.frombuffer(frames, "u1") / self.max * 2 - 1
+            case PCMEncoding.SIGNED_16:
+            case PCMEncoding.SIGNED_24:   
+            case PCMEncoding.SIGNED_32:  
+            case _:
+                raise TypeError("unsupported encoding")
